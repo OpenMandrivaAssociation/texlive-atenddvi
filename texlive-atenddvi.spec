@@ -1,6 +1,6 @@
 Name:		texlive-atenddvi
 Version:	56922
-Release:	1
+Release:	2
 Summary:	Provides the \AtEndDvi command
 Group:		Publishing
 URL:		http://www.ctan.org/tex-archive/macros/latex/contrib/atenddvi
