@@ -3,7 +3,7 @@ Version:	56922
 Release:	2
 Summary:	Provides the \AtEndDvi command
 Group:		Publishing
-URL:		http://www.ctan.org/tex-archive/macros/latex/contrib/atenddvi
+URL:		https://www.ctan.org/tex-archive/macros/latex/contrib/atenddvi
 License:	lppl1.3c
 Source0:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/atenddvi.r%{version}.tar.xz
 Source1:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/atenddvi.doc.r%{version}.tar.xz
