@@ -13,7 +13,7 @@ Source0:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/atenddvi.r%{tl_r
 Source1:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/atenddvi.doc.r%{tl_revision}.tar.xz
 Source2:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/atenddvi.source.r%{tl_revision}.tar.xz
 BuildArch:	noarch
-Requires(pre):	texlive-tlpkg
+BuildSystem:	texlive
 Provides:	texlive(%{tl_name}) = %{tl_revision}
 
 %description
@@ -25,46 +25,3 @@ document at the end of the last page. Thus \special and \write remain
 effective, because they are put into the last page. This is the main
 difference to \AtEndDocument.
 
-%prep
-%setup -q -c -a1 -a2
-rm -rf tlpkg
-if [ -d RELOC ]; then
-	cp -a RELOC/. .
-	rm -rf RELOC
-fi
-
-%build
-
-%install
-mkdir -p %{buildroot}%{_datadir}/texmf-dist
-# Flat tlnet layout: tex/ doc/ source/ fonts/ ... -> texmf-dist/
-if [ -d texmf-dist ]; then
-	cp -a texmf-dist/. %{buildroot}%{_datadir}/texmf-dist/
-elif [ -d texmf ]; then
-	mkdir -p %{buildroot}%{_datadir}/texmf
-	cp -a texmf/. %{buildroot}%{_datadir}/texmf/
-else
-	for d in * .[!.]* ..?*; do
-		[ -e "$d" ] || continue
-		case "$d" in tlpkg|RELOC) continue ;; esac
-		cp -a "$d" %{buildroot}%{_datadir}/texmf-dist/
-	done
-fi
-rm -rf %{buildroot}%{_datadir}/texmf-dist/tlpkg
-
-%files
-%dir %{_datadir}/texmf-dist
-%dir %{_datadir}/texmf-dist/doc
-%dir %{_datadir}/texmf-dist/source
-%dir %{_datadir}/texmf-dist/tex
-%dir %{_datadir}/texmf-dist/doc/latex
-%dir %{_datadir}/texmf-dist/source/latex
-%dir %{_datadir}/texmf-dist/tex/latex
-%dir %{_datadir}/texmf-dist/doc/latex/atenddvi
-%dir %{_datadir}/texmf-dist/source/latex/atenddvi
-%dir %{_datadir}/texmf-dist/tex/latex/atenddvi
-%doc %{_datadir}/texmf-dist/doc/latex/atenddvi/README.md
-%doc %{_datadir}/texmf-dist/doc/latex/atenddvi/atenddvi.pdf
-%doc %{_datadir}/texmf-dist/source/latex/atenddvi/atenddvi.dtx
-%{_datadir}/texmf-dist/tex/latex/atenddvi/atenddvi-2019-12-11.sty
-%{_datadir}/texmf-dist/tex/latex/atenddvi/atenddvi.sty
